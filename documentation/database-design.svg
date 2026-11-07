@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 550" width="900" height="550">
+  <defs>
+    <linearGradient id="bgGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0f1d" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <filter id="shadow2">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="550" fill="url(#bgGrad2)" rx="16"/>
+
+  <text x="450" y="45" fill="#ffffff" font-family="system-ui, sans-serif" font-size="22" font-weight="bold" text-anchor="middle">
+    PhishGuard AI — Database &amp; Data Model Architecture
+  </text>
+  <text x="450" y="70" fill="#94a3b8" font-family="monospace" font-size="12" text-anchor="middle">
+    Entity-Relationship Diagram (Users, Scans, Feature Vectors &amp; Audit Logs)
+  </text>
+
+  <!-- USER ENTITY -->
+  <rect x="60" y="110" width="340" height="380" rx="10" fill="#111827" stroke="#3b82f6" stroke-width="2" filter="url(#shadow2)"/>
+  <rect x="60" y="110" width="340" height="42" rx="10" fill="#1e3a8a"/>
+  <text x="230" y="137" fill="#ffffff" font-family="system-ui" font-size="15" font-weight="bold" text-anchor="middle">
+    Users (Collection / Table)
+  </text>
+
+  <g font-family="monospace" font-size="12" fill="#cbd5e1">
+    <text x="80" y="180"><tspan fill="#38bdf8">PK</tspan> _id : ObjectId / String</text>
+    <text x="80" y="210">name : String</text>
+    <text x="80" y="240"><tspan fill="#eab308">UQ</tspan> email : String</text>
+    <text x="80" y="270">password : String (Bcrypt Hash)</text>
+    <text x="80" y="300">role : Enum ['user', 'admin']</text>
+    <text x="80" y="330">avatar : String (URL)</text>
+    <text x="80" y="360">status : Enum ['active', 'suspended']</text>
+    <text x="80" y="390">scansCount : Number</text>
+    <text x="80" y="420">createdAt : DateTime</text>
+    <text x="80" y="450">updatedAt : DateTime</text>
+  </g>
+
+  <!-- SCAN ENTITY -->
+  <rect x="500" y="110" width="340" height="380" rx="10" fill="#111827" stroke="#06b6d4" stroke-width="2" filter="url(#shadow2)"/>
+  <rect x="500" y="110" width="340" height="42" rx="10" fill="#0e7490"/>
+  <text x="670" y="137" fill="#ffffff" font-family="system-ui" font-size="15" font-weight="bold" text-anchor="middle">
+    Scans (Collection / Table)
+  </text>
+
+  <g font-family="monospace" font-size="12" fill="#cbd5e1">
+    <text x="520" y="175"><tspan fill="#38bdf8">PK</tspan> _id : ObjectId / String</text>
+    <text x="520" y="200"><tspan fill="#a855f7">FK</tspan> userId : ObjectId (Nullable for Guests)</text>
+    <text x="520" y="225">url : String</text>
+    <text x="520" y="250">domain : String</text>
+    <text x="520" y="275">status : Enum ['Legitimate', 'Suspicious', 'Phishing']</text>
+    <text x="520" y="300">threatLevel : Enum ['Low', 'Medium', 'High']</text>
+    <text x="520" y="325">riskScore : Float [0.0 - 100.0]</text>
+    <text x="520" y="350">confidence : Float</text>
+    <text x="520" y="375">ipAddress : String &amp; country : String</text>
+    <text x="520" y="400">sslValid : Boolean</text>
+    <text x="520" y="425">features : Object (25 Extracted Signals)</text>
+    <text x="520" y="450">indicators : Array[String]</text>
+    <text x="520" y="475">createdAt : DateTime</text>
+  </g>
+
+  <!-- Relationship Connector Line -->
+  <path d="M 400 240 L 500 200" stroke="#06b6d4" stroke-width="2" stroke-dasharray="5"/>
+  <circle cx="400" cy="240" r="4" fill="#3b82f6"/>
+  <circle cx="500" cy="200" r="4" fill="#06b6d4"/>
+  <text x="450" y="215" fill="#38bdf8" font-family="monospace" font-size="11" text-anchor="middle">1 : N (User Scans)</text>
+
+</svg>
+
